@@ -1,0 +1,88 @@
+---
+import { negocio } from '../data/negocio.js';
+
+const ano = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div class="container footer__inner">
+    <div>
+      <span class="footer__brand">{negocio.nome}</span>
+      <p class="footer__line">{negocio.tagline}</p>
+    </div>
+
+    <div>
+      <h2 class="footer__title">Onde</h2>
+      <p class="footer__line">{negocio.endereco}</p>
+      <p class="footer__line">WhatsApp {negocio.whatsappDisplay}</p>
+    </div>
+
+    <div>
+      <h2 class="footer__title">Quando</h2>
+      {negocio.horarios.map((h) => (
+        <p class="footer__line"><strong>{h.dias}:</strong> {h.horas}</p>
+      ))}
+      <p class="footer__line">{negocio.entrega}</p>
+    </div>
+  </div>
+
+  <div class="container footer__base">
+    <p>© {ano} {negocio.nome} · negócio fictício, sem fins comerciais.</p>
+    <p>Projeto demonstrativo — desenvolvido pela Tchê Sites.</p>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background-color: var(--carvao);
+    color: rgba(246, 241, 231, 0.85);
+    padding-block: clamp(2.5rem, 6vw, 4rem) 1.5rem;
+    font-size: var(--text-sm);
+  }
+
+  .footer__inner {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr;
+    gap: 2rem;
+  }
+
+  .footer__brand {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: var(--text-lg);
+    color: var(--ambar-texto);
+  }
+
+  .footer__title {
+    color: var(--ambar-texto);
+    font-size: var(--text-base);
+    margin-bottom: 0.6rem;
+  }
+
+  .footer__line {
+    color: rgba(246, 241, 231, 0.75);
+    margin-bottom: 0.25rem;
+  }
+
+  .footer__line strong {
+    color: rgba(246, 241, 231, 0.95);
+  }
+
+  .footer__base {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.5rem;
+    margin-top: 2.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid rgba(246, 241, 231, 0.15);
+    color: rgba(246, 241, 231, 0.6);
+  }
+
+  @media (max-width: 52rem) {
+    .footer__inner {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+  }
+</style>

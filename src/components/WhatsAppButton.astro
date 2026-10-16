@@ -1,0 +1,17 @@
+---
+import { whatsappLink } from '../data/negocio.js';
+
+interface Props {
+  label?: string;
+  message?: string;
+}
+
+const {
+  label = 'Pedir no WhatsApp',
+  message = 'Olá! Vi o catálogo da Torra Bairro e queria fazer um pedido.',
+} = Astro.props;
+---
+
+<a class="btn btn--solid" href={whatsappLink(message)} target="_blank" rel="noopener">
+  {label}
+</a>

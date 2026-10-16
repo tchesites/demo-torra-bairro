@@ -1,0 +1,14 @@
+---
+interface Props {
+  tone?: 'claro' | 'branco' | 'escuro';
+  id?: string;
+}
+
+const { tone = 'claro', id } = Astro.props;
+---
+
+<section class={`section section--${tone}`} id={id}>
+  <div class="container">
+    <slot />
+  </div>
+</section>

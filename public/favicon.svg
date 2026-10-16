@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Torra Bairro">
+  <rect width="64" height="64" rx="14" fill="#17140F" />
+  <ellipse cx="32" cy="34" rx="14" ry="17" fill="#F0B968" />
+  <path d="M32 18c-6 6-6 26 0 32" stroke="#9C6113" stroke-width="3" fill="none" stroke-linecap="round" />
+</svg>

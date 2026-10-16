@@ -1,0 +1,33 @@
+:root {
+  /* Cores — identidade da Torra Bairro */
+  --preto: #17140f;
+  --carvao: #241f18;
+  --creme: #f6f1e7;
+  --branco: #ffffff;
+  --ambar: #d98a2b;
+  --ambar-texto: #f0b968;
+  --ambar-escuro: #9c6113;
+  --ambar-hover: #7f4d0e;
+  --terra: #8c4a2f;
+  --texto: #241f18;
+  --texto-suave: #6b6154;
+  --borda: rgba(36, 31, 24, 0.14);
+
+  /* Tipografia */
+  --font-display: 'Space Grotesk', system-ui, -apple-system, sans-serif;
+  --font-body: 'DM Sans', system-ui, -apple-system, sans-serif;
+
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.6rem;
+  --text-2xl: clamp(1.9rem, 5vw, 3rem);
+  --text-3xl: clamp(2.2rem, 6vw, 3.6rem);
+
+  /* Layout */
+  --container: 1120px;
+  --gutter: 1.25rem;
+  --section-y: clamp(3.5rem, 8vw, 5.5rem);
+  --radius: 14px;
+  --radius-sm: 8px;
+}
