@@ -1,0 +1,94 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Section from '../../components/Section.astro';
+import ProdutoCard from '../../components/ProdutoCard.astro';
+import WhatsAppButton from '../../components/WhatsAppButton.astro';
+import { categorias, categoriaPorSlug, produtosDaCategoria } from '../../data/catalogo.js';
+
+export function getStaticPaths() {
+  return categorias.map((c) => ({ params: { slug: c.slug } }));
+}
+
+const { slug } = Astro.params;
+const categoria = categoriaPorSlug(slug);
+const itens = produtosDaCategoria(slug);
+---
+
+<BaseLayout title={categoria.nome} description={`${categoria.nome} da Torra Bairro: ${categoria.descricao}`}>
+  <Section tone="escuro">
+    <div class="hero">
+      <p class="hero__volta"><a href="/#categorias">← Catálogo</a></p>
+      <p class="eyebrow">Categoria</p>
+      <h1 class="hero__title">{categoria.nome}</h1>
+      <p class="hero__text">{categoria.descricao}</p>
+    </div>
+  </Section>
+
+  <Section tone="claro">
+    <div class="produtos">
+      {itens.map((p) => (
+        <ProdutoCard
+          slug={p.slug}
+          nome={p.nome}
+          descricao={p.descricao}
+          preco={p.preco}
+          unidade={p.unidade}
+          notas={p.notas}
+        />
+      ))}
+    </div>
+
+    <div class="cta">
+      <WhatsAppButton label={`Pedir ${categoria.nome}`} message={`Olá! Queria ver opções de ${categoria.nome} da Torra Bairro.`} />
+      <a class="btn btn--ghost" href="/#categorias">Ver outras categorias</a>
+    </div>
+  </Section>
+</BaseLayout>
+
+<style>
+  .hero__volta {
+    margin-bottom: 1rem;
+  }
+
+  .hero__volta a {
+    color: var(--ambar-texto);
+    font-size: var(--text-sm);
+  }
+
+  .hero__title {
+    font-size: var(--text-3xl);
+    color: var(--creme);
+  }
+
+  .hero__text {
+    margin-top: 1rem;
+    color: rgba(246, 241, 231, 0.85);
+    font-size: var(--text-lg);
+  }
+
+  .produtos {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+    align-items: stretch;
+  }
+
+  .cta {
+    margin-top: 2.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  @media (max-width: 56rem) {
+    .produtos {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (min-width: 40rem) and (max-width: 56rem) {
+    .produtos {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>
