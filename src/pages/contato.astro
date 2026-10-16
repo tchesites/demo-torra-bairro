@@ -1,0 +1,101 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Section from '../components/Section.astro';
+import WhatsAppButton from '../components/WhatsAppButton.astro';
+import { negocio } from '../data/negocio.js';
+
+const mapaUrl =
+  'https://www.google.com/maps/search/?api=1&query=Rua+da+Torra+88+Cidade+Baixa+Porto+Alegre';
+---
+
+<BaseLayout
+  title="Contato"
+  description="Fale com a Torra Bairro: onde retirar, horários e pedidos pelo WhatsApp."
+>
+  <Section tone="escuro">
+    <div class="hero">
+      <p class="eyebrow">Contato</p>
+      <h1 class="hero__title">Passa aqui ou pede pelo WhatsApp</h1>
+      <p class="hero__text">
+        A gente torra durante a semana e atende no balcão. Pra encomendar, o caminho
+        mais rápido é o WhatsApp.
+      </p>
+    </div>
+  </Section>
+
+  <Section tone="claro">
+    <div class="blocos">
+      <div class="bloco">
+        <h2 class="bloco__titulo">Onde retirar</h2>
+        <p class="bloco__linha">{negocio.endereco}</p>
+        <a class="btn btn--ghost" href={mapaUrl} target="_blank" rel="noopener">Ver no mapa</a>
+      </div>
+
+      <div class="bloco">
+        <h2 class="bloco__titulo">Horários</h2>
+        {negocio.horarios.map((h) => (
+          <p class="bloco__linha"><strong>{h.dias}:</strong> {h.horas}</p>
+        ))}
+      </div>
+
+      <div class="bloco">
+        <h2 class="bloco__titulo">Pedidos e entrega</h2>
+        <p class="bloco__linha">WhatsApp {negocio.whatsappDisplay}</p>
+        <p class="bloco__linha">{negocio.entrega}</p>
+        <div class="bloco__acao">
+          <WhatsAppButton label="Chamar no WhatsApp" />
+        </div>
+      </div>
+    </div>
+  </Section>
+</BaseLayout>
+
+<style>
+  .hero__title {
+    font-size: var(--text-3xl);
+    color: var(--creme);
+    max-width: 22ch;
+  }
+
+  .hero__text {
+    margin-top: 1.25rem;
+    color: rgba(246, 241, 231, 0.85);
+    font-size: var(--text-lg);
+  }
+
+  .blocos {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem;
+  }
+
+  .bloco {
+    padding-top: 1.25rem;
+    border-top: 3px solid var(--ambar);
+  }
+
+  .bloco__titulo {
+    font-size: var(--text-lg);
+    margin-bottom: 1rem;
+  }
+
+  .bloco__linha {
+    color: var(--texto-suave);
+    margin-bottom: 0.5rem;
+  }
+
+  .bloco__linha strong {
+    color: var(--texto);
+  }
+
+  .bloco__acao {
+    margin-top: 1.25rem;
+  }
+
+  @media (max-width: 52rem) {
+    .blocos {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+  }
+</style>
