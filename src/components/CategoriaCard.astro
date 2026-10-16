@@ -1,0 +1,64 @@
+---
+import { categoriaUrl } from '../data/catalogo.js';
+
+interface Props {
+  slug: string;
+  nome: string;
+  descricao: string;
+  quantidade: number;
+}
+
+const { slug, nome, descricao, quantidade } = Astro.props;
+---
+
+<a class="categoria" href={categoriaUrl(slug)}>
+  <span class="categoria__topo">
+    <span class="categoria__nome">{nome}</span>
+    <span class="categoria__qtd">{quantidade} itens</span>
+  </span>
+  <span class="categoria__desc">{descricao}</span>
+</a>
+
+<style>
+  .categoria {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    background-color: var(--branco);
+    border: 1px solid var(--borda);
+    border-left: 4px solid var(--ambar);
+    border-radius: var(--radius-sm);
+    padding: 1.5rem;
+    transition: border-color 0.2s ease, transform 0.15s ease;
+  }
+
+  .categoria:hover {
+    transform: translateY(-2px);
+    border-left-color: var(--terra);
+  }
+
+  .categoria__topo {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+  }
+
+  .categoria__nome {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: var(--text-lg);
+    color: var(--texto);
+  }
+
+  .categoria__qtd {
+    font-size: var(--text-sm);
+    color: var(--texto-suave);
+    white-space: nowrap;
+  }
+
+  .categoria__desc {
+    color: var(--texto-suave);
+    font-size: var(--text-sm);
+  }
+</style>

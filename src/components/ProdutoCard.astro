@@ -1,0 +1,94 @@
+---
+import { precoBRL } from '../data/negocio.js';
+import { produtoUrl } from '../data/catalogo.js';
+
+interface Props {
+  slug: string;
+  nome: string;
+  descricao: string;
+  preco: number;
+  unidade?: string;
+  notas?: string;
+}
+
+const { slug, nome, descricao, preco, unidade, notas } = Astro.props;
+---
+
+<article class="produto">
+  <a class="produto__link" href={produtoUrl(slug)}>
+    <div class="produto__topo">
+      <h3 class="produto__nome">{nome}</h3>
+      <p class="produto__preco">{precoBRL(preco)} <span>{unidade}</span></p>
+    </div>
+    <p class="produto__desc">{descricao}</p>
+    {notas && <p class="produto__notas">Notas: {notas}</p>}
+    <span class="produto__ver">Ver detalhes →</span>
+  </a>
+</article>
+
+<style>
+  .produto {
+    background-color: var(--branco);
+    border: 1px solid var(--borda);
+    border-radius: var(--radius);
+    transition: border-color 0.2s ease, transform 0.15s ease;
+  }
+
+  .produto:hover {
+    border-color: var(--ambar);
+    transform: translateY(-2px);
+  }
+
+  .produto__link {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    padding: 1.5rem;
+    height: 100%;
+  }
+
+  .produto__topo {
+    display: flex;
+    gap: 1rem;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+
+  .produto__nome {
+    font-size: var(--text-lg);
+    line-height: 1.25;
+  }
+
+  .produto__preco {
+    white-space: nowrap;
+    font-family: var(--font-display);
+    font-weight: 700;
+    color: var(--texto);
+  }
+
+  .produto__preco span {
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: var(--text-sm);
+    color: var(--texto-suave);
+  }
+
+  .produto__desc {
+    color: var(--texto-suave);
+    font-size: var(--text-sm);
+    flex: 1;
+  }
+
+  .produto__notas {
+    color: var(--terra);
+    font-size: var(--text-sm);
+  }
+
+  .produto__ver {
+    margin-top: 0.5rem;
+    color: var(--ambar-escuro);
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: var(--text-sm);
+  }
+</style>

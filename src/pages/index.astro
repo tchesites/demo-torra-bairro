@@ -1,12 +1,188 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Section from '../components/Section.astro';
+import WhatsAppButton from '../components/WhatsAppButton.astro';
+import CategoriaCard from '../components/CategoriaCard.astro';
+import ProdutoCard from '../components/ProdutoCard.astro';
+import { negocio } from '../data/negocio.js';
+import { categorias, destaques, produtosDaCategoria } from '../data/catalogo.js';
+
+const passos = [
+  {
+    titulo: 'Escolhe no catálogo',
+    texto: 'Navega pelas categorias e vê os detalhes de cada item.',
+  },
+  {
+    titulo: 'Pede pelo WhatsApp',
+    texto: 'O botão de cada produto abre a conversa com o pedido já escrito.',
+  },
+  {
+    titulo: 'Retira ou recebe',
+    texto: 'Retirada no balcão ou entrega no mesmo dia, em Porto Alegre.',
+  },
+];
 ---
 
 <BaseLayout title="Café torrado no bairro">
-  <section class="section section--claro">
-    <div class="container">
-      <h1>Torra Bairro</h1>
-      <p>Catálogo em construção.</p>
+  <Section tone="escuro">
+    <div class="hero">
+      <p class="eyebrow">Torra fresca, toda semana</p>
+      <h1 class="hero__title">Café torrado aqui no bairro, fresquinho na tua xícara.</h1>
+      <p class="hero__text">
+        Do grão à embalagem, tudo feito por aqui. Escolhe no catálogo e pede pelo
+        WhatsApp — a gente separa na hora.
+      </p>
+      <div class="hero__actions">
+        <WhatsAppButton label="Fazer um pedido" />
+        <a class="btn btn--ghost-light" href="#categorias">Ver o catálogo</a>
+      </div>
     </div>
-  </section>
+  </Section>
+
+  <Section tone="claro" id="categorias">
+    <div class="section-head">
+      <p class="eyebrow">Catálogo</p>
+      <h2>Por onde começar</h2>
+      <p>Quatro categorias, do café em si aos equipamentos pra preparar em casa.</p>
+    </div>
+    <div class="categorias">
+      {categorias.map((c) => (
+        <CategoriaCard
+          slug={c.slug}
+          nome={c.nome}
+          descricao={c.descricao}
+          quantidade={produtosDaCategoria(c.slug).length}
+        />
+      ))}
+    </div>
+  </Section>
+
+  <Section tone="branco" id="destaques">
+    <div class="section-head">
+      <p class="eyebrow">Destaques</p>
+      <h2>O que sai mais</h2>
+      <p>Uma amostra do catálogo — o resto tá nas categorias.</p>
+    </div>
+    <div class="produtos">
+      {destaques.map((p) => (
+        <ProdutoCard
+          slug={p.slug}
+          nome={p.nome}
+          descricao={p.descricao}
+          preco={p.preco}
+          unidade={p.unidade}
+          notas={p.notas}
+        />
+      ))}
+    </div>
+  </Section>
+
+  <Section tone="escuro">
+    <div class="section-head">
+      <p class="eyebrow">Como comprar</p>
+      <h2>Simples assim, em três passos</h2>
+    </div>
+    <ol class="passos">
+      {passos.map((p, i) => (
+        <li class="passo">
+          <span class="passo__num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+          <h3 class="passo__titulo">{p.titulo}</h3>
+          <p class="passo__texto">{p.texto}</p>
+        </li>
+      ))}
+    </ol>
+    <div class="passos__cta">
+      <WhatsAppButton label="Chamar no WhatsApp" />
+      <p class="passos__local">{negocio.endereco}</p>
+    </div>
+  </Section>
 </BaseLayout>
+
+<style>
+  .hero__title {
+    font-size: var(--text-3xl);
+    color: var(--creme);
+    max-width: 22ch;
+  }
+
+  .hero__text {
+    margin-top: 1.25rem;
+    color: rgba(246, 241, 231, 0.85);
+    font-size: var(--text-lg);
+  }
+
+  .hero__actions {
+    margin-top: 1.9rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .categorias {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+  }
+
+  .produtos {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+    align-items: stretch;
+  }
+
+  .passos {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+
+  .passo__num {
+    display: block;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: var(--text-xl);
+    color: var(--ambar-texto);
+    margin-bottom: 0.75rem;
+  }
+
+  .passo__titulo {
+    color: var(--creme);
+    font-size: var(--text-lg);
+    margin-bottom: 0.5rem;
+  }
+
+  .passo__texto {
+    color: rgba(246, 241, 231, 0.82);
+  }
+
+  .passos__cta {
+    margin-top: 2.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1.25rem;
+  }
+
+  .passos__local {
+    color: rgba(246, 241, 231, 0.75);
+    font-size: var(--text-sm);
+  }
+
+  @media (max-width: 56rem) {
+    .categorias,
+    .produtos,
+    .passos {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (min-width: 40rem) and (max-width: 56rem) {
+    .produtos,
+    .passos {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>
