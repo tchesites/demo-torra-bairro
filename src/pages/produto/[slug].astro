@@ -1,0 +1,150 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Section from '../../components/Section.astro';
+import WhatsAppButton from '../../components/WhatsAppButton.astro';
+import ProdutoCard from '../../components/ProdutoCard.astro';
+import { produtos, produtoPorSlug, categoriaPorSlug, categoriaUrl, produtosDaCategoria } from '../../data/catalogo.js';
+import { precoBRL } from '../../data/negocio.js';
+
+export function getStaticPaths() {
+  return produtos.map((p) => ({ params: { slug: p.slug } }));
+}
+
+const { slug } = Astro.params;
+const produto = produtoPorSlug(slug);
+const categoria = categoriaPorSlug(produto.categoria);
+const relacionados = produtosDaCategoria(produto.categoria).filter((p) => p.slug !== produto.slug).slice(0, 3);
+
+const mensagem = `Olá! Queria pedir: ${produto.nome} (${produto.unidade}) — ${precoBRL(produto.preco)}.`;
+---
+
+<BaseLayout title={produto.nome} description={`${produto.nome} — ${produto.descricao}`}>
+  <Section tone="claro">
+    <nav class="migalhas" aria-label="Você está em">
+      <a href="/#categorias">Catálogo</a>
+      <span aria-hidden="true">/</span>
+      <a href={categoriaUrl(categoria.slug)}>{categoria.nome}</a>
+      <span aria-hidden="true">/</span>
+      <span aria-current="page">{produto.nome}</span>
+    </nav>
+
+    <div class="produto">
+      <div class="produto__info">
+        <p class="eyebrow">{categoria.nome}</p>
+        <h1 class="produto__nome">{produto.nome}</h1>
+        <p class="produto__preco">
+          {precoBRL(produto.preco)} <span>{produto.unidade}</span>
+        </p>
+        <p class="produto__desc">{produto.descricao}</p>
+        {produto.notas && (
+          <p class="produto__notas"><strong>Notas sensoriais:</strong> {produto.notas}</p>
+        )}
+
+        <div class="produto__acao">
+          <WhatsAppButton label="Pedir este item" message={mensagem} />
+        </div>
+        <p class="produto__obs">
+          Pedido pelo WhatsApp com retirada no balcão ou entrega no mesmo dia, em
+          Porto Alegre. Pagamento na retirada ou por Pix.
+        </p>
+      </div>
+    </div>
+  </Section>
+
+  {relacionados.length > 0 && (
+    <Section tone="branco">
+      <div class="section-head">
+        <p class="eyebrow">Também em {categoria.nome}</p>
+        <h2>Tem mais por aqui</h2>
+      </div>
+      <div class="relacionados">
+        {relacionados.map((p) => (
+          <ProdutoCard
+            slug={p.slug}
+            nome={p.nome}
+            descricao={p.descricao}
+            preco={p.preco}
+            unidade={p.unidade}
+            notas={p.notas}
+          />
+        ))}
+      </div>
+    </Section>
+  )}
+</BaseLayout>
+
+<style>
+  .migalhas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: center;
+    color: var(--texto-suave);
+    font-size: var(--text-sm);
+    margin-bottom: 2rem;
+  }
+
+  .migalhas a {
+    color: var(--texto-suave);
+    text-decoration: underline;
+  }
+
+  .produto__nome {
+    font-size: var(--text-2xl);
+    margin-block: 0.5rem 1rem;
+  }
+
+  .produto__preco {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: var(--text-xl);
+    color: var(--texto);
+    margin-bottom: 1.25rem;
+  }
+
+  .produto__preco span {
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: var(--text-base);
+    color: var(--texto-suave);
+  }
+
+  .produto__desc {
+    font-size: var(--text-lg);
+    margin-bottom: 0.85rem;
+  }
+
+  .produto__notas {
+    color: var(--texto-suave);
+    margin-bottom: 1.75rem;
+  }
+
+  .produto__acao {
+    margin-bottom: 1rem;
+  }
+
+  .produto__obs {
+    color: var(--texto-suave);
+    font-size: var(--text-sm);
+    max-width: 52ch;
+  }
+
+  .relacionados {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+    align-items: stretch;
+  }
+
+  @media (max-width: 56rem) {
+    .relacionados {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (min-width: 40rem) and (max-width: 56rem) {
+    .relacionados {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>
