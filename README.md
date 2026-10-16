@@ -29,7 +29,7 @@ negócio, endereço, horário e telefone são fictícios.
 |---|---|
 | `/` | Home: hero, categorias e destaques |
 | `/categoria/<slug>/` | Itens de uma categoria (4 categorias) |
-| `/produto/<slug>/` | Detalhe do item + pedido pelo WhatsApp (15 itens) |
+| `/produto/<slug>/` | Detalhe do item + pedido pelo WhatsApp (16 itens) |
 | `/contato/` | Endereço, horários, entrega e WhatsApp |
 
 As páginas de categoria e de produto são geradas estaticamente com
@@ -44,8 +44,10 @@ As páginas de categoria e de produto são geradas estaticamente com
   escuro (daria ~3,9:1); para texto em seção escura usa-se `--ambar-texto`
   (`#f0b968`, 10,4:1) e o CTA usa fundo `--ambar-escuro` (`#9c6113`) com texto
   claro (5,1:1).
-- Dados em um único módulo (`catalogo.js`) para preço/unidade ficarem consistentes
-  entre home, categoria e detalhe.
+- Dados separados por responsabilidade: `negocio.js` (endereço, horários, WhatsApp)
+  e `catalogo.js` (categorias, produtos e helpers). As imagens dos produtos são
+  SVG gerados na paleta da marca (`public\produtos\`), referenciados por
+  `produtoImagem(slug)`.
 
 ## Deploy
 

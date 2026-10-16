@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="Moka 3 Xícaras">
+  <rect width="800" height="600" fill="#f6f1e7"/>
+  <g transform="translate(400 248)">
+    <rect x="-104" y="-136" width="208" height="28" rx="14" fill="#9c6113" opacity="0.7"/>
+    <path d="M-92 -120 h184 l-14 224 a30 30 0 0 1 -30 28 h-96 a30 30 0 0 1 -30 -28 z" fill="#9c6113"/>
+    <ellipse cx="0" cy="24" rx="36" ry="48" fill="#f6f1e7" opacity="0.92"/>
+    <path d="M0 -20 C 16 4 16 40 0 68" stroke="#9c6113" stroke-width="7" fill="none" stroke-linecap="round"/>
+  </g>
+  <text x="400" y="516" text-anchor="middle" font-family="'Space Grotesk', sans-serif" font-weight="700" font-size="36" fill="#241f18">Moka 3 Xícaras</text>
+  <text x="400" y="556" text-anchor="middle" font-family="'DM Sans', sans-serif" font-size="22" fill="#6b6154">3 xícaras</text>
+</svg>

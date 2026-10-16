@@ -25,6 +25,9 @@ const itens = produtosDaCategoria(slug);
   </Section>
 
   <Section tone="claro">
+    <div class="section-head">
+      <h2>{itens.length} {itens.length === 1 ? 'item' : 'itens'} em {categoria.nome}</h2>
+    </div>
     <div class="produtos">
       {itens.map((p) => (
         <ProdutoCard

@@ -168,7 +168,7 @@ p {
 .btn--ghost {
   background-color: transparent;
   color: var(--texto);
-  border: 1px solid rgba(36, 31, 24, 0.35);
+  border: 1px solid rgba(23, 20, 15, 0.5);
 }
 
 .btn--ghost:hover {
@@ -197,5 +197,12 @@ p {
   *::after {
     animation-duration: 0.001ms !important;
     transition-duration: 0.001ms !important;
+  }
+}
+
+/* Telas muito estreitas: menos respiro vertical pra caber o CTA na primeira dobra */
+@media (max-width: 26rem) {
+  :root {
+    --section-y: 2.5rem;
   }
 }

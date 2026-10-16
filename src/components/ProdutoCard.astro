@@ -1,6 +1,6 @@
 ---
 import { precoBRL } from '../data/negocio.js';
-import { produtoUrl } from '../data/catalogo.js';
+import { produtoUrl, produtoImagem } from '../data/catalogo.js';
 
 interface Props {
   slug: string;
@@ -16,13 +16,23 @@ const { slug, nome, descricao, preco, unidade, notas } = Astro.props;
 
 <article class="produto">
   <a class="produto__link" href={produtoUrl(slug)}>
-    <div class="produto__topo">
-      <h3 class="produto__nome">{nome}</h3>
-      <p class="produto__preco">{precoBRL(preco)} <span>{unidade}</span></p>
+    <img
+      class="produto__img"
+      src={produtoImagem(slug)}
+      alt=""
+      width="800"
+      height="600"
+      loading="lazy"
+    />
+    <div class="produto__corpo">
+      <div class="produto__topo">
+        <h3 class="produto__nome">{nome}</h3>
+        <p class="produto__preco">{precoBRL(preco)} <span>{unidade}</span></p>
+      </div>
+      <p class="produto__desc">{descricao}</p>
+      {notas && <p class="produto__notas">Notas: {notas}</p>}
+      <span class="produto__ver">Ver detalhes →</span>
     </div>
-    <p class="produto__desc">{descricao}</p>
-    {notas && <p class="produto__notas">Notas: {notas}</p>}
-    <span class="produto__ver">Ver detalhes →</span>
   </a>
 </article>
 
@@ -31,20 +41,34 @@ const { slug, nome, descricao, preco, unidade, notas } = Astro.props;
     background-color: var(--branco);
     border: 1px solid var(--borda);
     border-radius: var(--radius);
+    overflow: hidden;
     transition: border-color 0.2s ease, transform 0.15s ease;
   }
 
   .produto:hover {
-    border-color: var(--ambar);
+    border-color: var(--ambar-escuro);
     transform: translateY(-2px);
   }
 
   .produto__link {
     display: flex;
     flex-direction: column;
+    height: 100%;
+  }
+
+  .produto__img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    background-color: var(--creme);
+  }
+
+  .produto__corpo {
+    display: flex;
+    flex-direction: column;
     gap: 0.6rem;
     padding: 1.5rem;
-    height: 100%;
+    flex: 1;
   }
 
   .produto__topo {

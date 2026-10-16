@@ -3,7 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Section from '../../components/Section.astro';
 import WhatsAppButton from '../../components/WhatsAppButton.astro';
 import ProdutoCard from '../../components/ProdutoCard.astro';
-import { produtos, produtoPorSlug, categoriaPorSlug, categoriaUrl, produtosDaCategoria } from '../../data/catalogo.js';
+import { produtos, produtoPorSlug, categoriaPorSlug, categoriaUrl, produtosDaCategoria, produtoImagem } from '../../data/catalogo.js';
 import { precoBRL } from '../../data/negocio.js';
 
 export function getStaticPaths() {
@@ -29,6 +29,13 @@ const mensagem = `Olá! Queria pedir: ${produto.nome} (${produto.unidade}) — $
     </nav>
 
     <div class="produto">
+      <img
+        class="produto__img"
+        src={produtoImagem(produto.slug)}
+        alt={produto.nome}
+        width="800"
+        height="600"
+      />
       <div class="produto__info">
         <p class="eyebrow">{categoria.nome}</p>
         <h1 class="produto__nome">{produto.nome}</h1>
@@ -89,6 +96,20 @@ const mensagem = `Olá! Queria pedir: ${produto.nome} (${produto.unidade}) — $
     text-decoration: underline;
   }
 
+  .produto {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    gap: 3rem;
+    align-items: start;
+  }
+
+  .produto__img {
+    width: 100%;
+    border: 1px solid var(--borda);
+    border-radius: var(--radius);
+    background-color: var(--branco);
+  }
+
   .produto__nome {
     font-size: var(--text-2xl);
     margin-block: 0.5rem 1rem;
@@ -137,6 +158,11 @@ const mensagem = `Olá! Queria pedir: ${produto.nome} (${produto.unidade}) — $
   }
 
   @media (max-width: 56rem) {
+    .produto {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
     .relacionados {
       grid-template-columns: 1fr;
     }

@@ -55,11 +55,20 @@ export const produtos = [
     slug: 'blend-da-casa',
     nome: 'Blend da Casa',
     categoria: 'torras',
-    descricao: 'Nosso café de todo dia. Também disponível em pacote de 500g.',
+    descricao: 'Nosso café de todo dia, em pacote de 250g.',
     notas: 'Cacau, mel e finalização doce.',
     preco: 32,
     unidade: '250g',
     destaque: true,
+  },
+  {
+    slug: 'blend-da-casa-500',
+    nome: 'Blend da Casa · 500g',
+    categoria: 'torras',
+    descricao: 'O pacote grande do nosso café de todo dia — rende quase o dobro.',
+    notas: 'Cacau, mel e finalização doce.',
+    preco: 58,
+    unidade: '500g',
   },
   {
     slug: 'descafeinado',
@@ -161,3 +170,4 @@ export const destaques = produtos.filter((p) => p.destaque);
 
 export const categoriaUrl = (slug) => `/categoria/${slug}/`;
 export const produtoUrl = (slug) => `/produto/${slug}/`;
+export const produtoImagem = (slug) => `/produtos/${slug}.svg`;
