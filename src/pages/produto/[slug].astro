@@ -5,6 +5,7 @@ import WhatsAppButton from '../../components/WhatsAppButton.astro';
 import ProdutoCard from '../../components/ProdutoCard.astro';
 import { produtos, produtoPorSlug, categoriaPorSlug, categoriaUrl, produtosDaCategoria, produtoImagem } from '../../data/catalogo.js';
 import { precoBRL } from '../../data/negocio.js';
+import { url } from '../../utils/url.js';
 
 export function getStaticPaths() {
   return produtos.map((p) => ({ params: { slug: p.slug } }));
@@ -21,7 +22,7 @@ const mensagem = `Olá! Queria pedir: ${produto.nome} (${produto.unidade}) — $
 <BaseLayout title={produto.nome} description={`${produto.nome} — ${produto.descricao}`}>
   <Section tone="claro">
     <nav class="migalhas" aria-label="Você está em">
-      <a href="/#categorias">Catálogo</a>
+      <a href={url('/#categorias')}>Catálogo</a>
       <span aria-hidden="true">/</span>
       <a href={categoriaUrl(categoria.slug)}>{categoria.nome}</a>
       <span aria-hidden="true">/</span>

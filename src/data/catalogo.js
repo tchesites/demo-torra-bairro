@@ -1,3 +1,5 @@
+import { url } from '../utils/url.js';
+
 export const categorias = [
   {
     slug: 'torras',
@@ -168,6 +170,6 @@ export const produtoPorSlug = (slug) => produtos.find((p) => p.slug === slug);
 export const produtosDaCategoria = (slug) => produtos.filter((p) => p.categoria === slug);
 export const destaques = produtos.filter((p) => p.destaque);
 
-export const categoriaUrl = (slug) => `/categoria/${slug}/`;
-export const produtoUrl = (slug) => `/produto/${slug}/`;
-export const produtoImagem = (slug) => `/produtos/${slug}.svg`;
+export const categoriaUrl = (slug) => url(`/categoria/${slug}/`);
+export const produtoUrl = (slug) => url(`/produto/${slug}/`);
+export const produtoImagem = (slug) => url(`/produtos/${slug}.svg`);

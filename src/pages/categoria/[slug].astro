@@ -4,6 +4,7 @@ import Section from '../../components/Section.astro';
 import ProdutoCard from '../../components/ProdutoCard.astro';
 import WhatsAppButton from '../../components/WhatsAppButton.astro';
 import { categorias, categoriaPorSlug, produtosDaCategoria } from '../../data/catalogo.js';
+import { url } from '../../utils/url.js';
 
 export function getStaticPaths() {
   return categorias.map((c) => ({ params: { slug: c.slug } }));
@@ -17,7 +18,7 @@ const itens = produtosDaCategoria(slug);
 <BaseLayout title={categoria.nome} description={`${categoria.nome} da Torra Bairro: ${categoria.descricao}`}>
   <Section tone="escuro">
     <div class="hero">
-      <p class="hero__volta"><a href="/#categorias">← Catálogo</a></p>
+      <p class="hero__volta"><a href={url('/#categorias')}>← Catálogo</a></p>
       <p class="eyebrow">Categoria</p>
       <h1 class="hero__title">{categoria.nome}</h1>
       <p class="hero__text">{categoria.descricao}</p>
@@ -43,7 +44,7 @@ const itens = produtosDaCategoria(slug);
 
     <div class="cta">
       <WhatsAppButton label={`Pedir ${categoria.nome}`} message={`Olá! Queria ver opções de ${categoria.nome} da Torra Bairro.`} />
-      <a class="btn btn--ghost" href="/#categorias">Ver outras categorias</a>
+      <a class="btn btn--ghost" href={url('/#categorias')}>Ver outras categorias</a>
     </div>
   </Section>
 </BaseLayout>

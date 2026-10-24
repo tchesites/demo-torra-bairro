@@ -52,10 +52,17 @@ As páginas de categoria e de produto são geradas estaticamente com
 
 ## Deploy
 
-**Pendente.** O host dos demos é o **GitHub Pages**, como no
-`demo-padaria-da-praca` e no `demo-studio-vertice`. Falta ligar o Pages no repo
-(*Settings → Pages → Source = GitHub Actions*) e publicar; URL prevista
-`https://tchesites.github.io/demo-torra-bairro/`.
+**GitHub Pages**, por **GitHub Actions** (`.github\workflows\deploy.yml`): cada
+push em `main` roda `npm ci` + `astro build` e publica o artefato.
+
+- **URL:** <https://tchesites.github.io/demo-torra-bairro/>
+- O subcaminho é o nome do repositório. `astro.config.mjs` fixa `site` + `base`,
+  e **todo link interno passa por `url()` de `src\utils\url.js`** — inclusive os
+  das helpers `categoriaUrl()`, `produtoUrl()` e `produtoImagem()` em
+  `src\data\catalogo.js`, que geram as rotas das 22 páginas. Um `href="/x/"`
+  cru funcionaria local e quebraria no Pages.
+- **Local:** `npm run dev` serve em
+  `http://localhost:4321/demo-torra-bairro/`.
 
 O nome do repositório segue a convenção de `projetos\README.md`: `demo-` marca
 cliente fictício. O rodapé traz o aviso "Projeto demonstrativo — desenvolvido

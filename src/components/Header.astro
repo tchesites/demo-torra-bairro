@@ -1,10 +1,11 @@
 ---
 import WhatsAppButton from './WhatsAppButton.astro';
 import { negocio } from '../data/negocio.js';
+import { url } from '../utils/url.js';
 
 const links = [
-  { href: '/#categorias', label: 'Catálogo' },
-  { href: '/contato/', label: 'Contato' },
+  { href: url('/#categorias'), label: 'Catálogo' },
+  { href: url('/contato/'), label: 'Contato' },
 ];
 
 const atual = Astro.url.pathname;
@@ -12,7 +13,7 @@ const atual = Astro.url.pathname;
 
 <header class="header">
   <div class="container header__inner">
-    <a href="/" class="brand" aria-label={`${negocio.nome} — página inicial`}>
+    <a href={url('/')} class="brand" aria-label={`${negocio.nome} — página inicial`}>
       <span class="brand__mark" aria-hidden="true">☕</span>
       <span class="brand__name">{negocio.nome}</span>
     </a>
