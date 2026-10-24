@@ -4,6 +4,7 @@
 - **Entidade:** tche-sites
 - **Stack:** astro
 - **Status:** ativo
+- **Repo:** `tchesites/demo-torra-bairro` — `git@github.com-tchesites:tchesites/demo-torra-bairro.git`
 - **Como rodar:** `npm install` e depois `npm run dev` (http://localhost:4321)
 
 ## Sobre
@@ -51,6 +52,10 @@ As páginas de categoria e de produto são geradas estaticamente com
 
 ## Deploy
 
-**Pendente** (contas de GitHub/host a definir). URL prevista
-`https://torra-bairro.vercel.app`. O rodapé traz o aviso "Projeto demonstrativo —
-desenvolvido pela Tchê Sites".
+**Pendente.** Falta publicar em host gratuito. URL prevista
+`https://torra-bairro.vercel.app` — o projeto na Vercel se chama `torra-bairro`
+(sem o prefixo `demo-` do repo), para a URL ficar limpa.
+
+O nome do repositório segue a convenção de `projetos\README.md`: `demo-` marca
+cliente fictício. O rodapé traz o aviso "Projeto demonstrativo — desenvolvido
+pela Tchê Sites".
