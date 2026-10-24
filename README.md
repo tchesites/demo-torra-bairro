@@ -52,9 +52,10 @@ As páginas de categoria e de produto são geradas estaticamente com
 
 ## Deploy
 
-**Pendente.** Falta publicar em host gratuito. URL prevista
-`https://torra-bairro.vercel.app` — o projeto na Vercel se chama `torra-bairro`
-(sem o prefixo `demo-` do repo), para a URL ficar limpa.
+**Pendente.** O host dos demos é o **GitHub Pages**, como no
+`demo-padaria-da-praca` e no `demo-studio-vertice`. Falta ligar o Pages no repo
+(*Settings → Pages → Source = GitHub Actions*) e publicar; URL prevista
+`https://tchesites.github.io/demo-torra-bairro/`.
 
 O nome do repositório segue a convenção de `projetos\README.md`: `demo-` marca
 cliente fictício. O rodapé traz o aviso "Projeto demonstrativo — desenvolvido
